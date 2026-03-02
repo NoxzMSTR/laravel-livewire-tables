@@ -21,7 +21,6 @@ final class DateTimeFilterTest extends FilterTestCase
             'type' => 'datetime-local',
             'wire:key' => 'test123-filter-datetime-active',
         ];
-
     }
 
     public function test_can_get_filter_callback(): void
@@ -110,7 +109,6 @@ final class DateTimeFilterTest extends FilterTestCase
         self::$filterInstance->config(['pillFormat' => 'd-M-Y - H:i']);
 
         $this->assertSame('d-M-Y - H:i', self::$filterInstance->getConfig('pillFormat'));
-
     }
 
     public function test_can_check_if_can_set_default_values(): void
@@ -147,33 +145,32 @@ final class DateTimeFilterTest extends FilterTestCase
     {
 
         $this->assertSame('live', self::$filterInstance->getWireableMethod());
-        $this->assertSame('wire:model.live="filterComponents.active"', self::$filterInstance->getWireMethod('filterComponents.'.self::$filterInstance->getKey()));
+        $this->assertSame('wire:model.live="filterComponents.active"', self::$filterInstance->getWireMethod('filterComponents.' . self::$filterInstance->getKey()));
 
         self::$filterInstance->setWireBlur();
 
         $this->assertSame('blur', self::$filterInstance->getWireableMethod());
 
-        $this->assertSame('wire:model.blur="filterComponents.active"', self::$filterInstance->getWireMethod('filterComponents.'.self::$filterInstance->getKey()));
+        $this->assertSame('wire:model.live.blur="filterComponents.active"', self::$filterInstance->getWireMethod('filterComponents.' . self::$filterInstance->getKey()));
 
         self::$filterInstance->setWireLive();
 
         $this->assertSame('live', self::$filterInstance->getWireableMethod());
-        $this->assertSame('wire:model.live="filterComponents.active"', self::$filterInstance->getWireMethod('filterComponents.'.self::$filterInstance->getKey()));
+        $this->assertSame('wire:model.live="filterComponents.active"', self::$filterInstance->getWireMethod('filterComponents.' . self::$filterInstance->getKey()));
 
         self::$filterInstance->setWireDefer();
 
         $this->assertSame('defer', self::$filterInstance->getWireableMethod());
-        $this->assertSame('wire:model="filterComponents.active"', self::$filterInstance->getWireMethod('filterComponents.'.self::$filterInstance->getKey()));
+        $this->assertSame('wire:model="filterComponents.active"', self::$filterInstance->getWireMethod('filterComponents.' . self::$filterInstance->getKey()));
 
         self::$filterInstance->setWireDebounce(250);
 
         $this->assertSame('live.debounce.250ms', self::$filterInstance->getWireableMethod());
-        $this->assertSame('wire:model.live.debounce.250ms="filterComponents.active"', self::$filterInstance->getWireMethod('filterComponents.'.self::$filterInstance->getKey()));
+        $this->assertSame('wire:model.live.debounce.250ms="filterComponents.active"', self::$filterInstance->getWireMethod('filterComponents.' . self::$filterInstance->getKey()));
 
         self::$filterInstance->setWireDebounce(500);
 
         $this->assertSame('live.debounce.500ms', self::$filterInstance->getWireableMethod());
-        $this->assertSame('wire:model.live.debounce.500ms="filterComponents.active"', self::$filterInstance->getWireMethod('filterComponents.'.self::$filterInstance->getKey()));
-
+        $this->assertSame('wire:model.live.debounce.500ms="filterComponents.active"', self::$filterInstance->getWireMethod('filterComponents.' . self::$filterInstance->getKey()));
     }
 }
