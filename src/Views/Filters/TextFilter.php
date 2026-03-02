@@ -11,7 +11,7 @@ class TextFilter extends Filter
     use HasWireables;
     use HandlesWildcardStrings;
 
-    public string $wireMethod = 'blur';
+    public string $wireMethod = 'live.blur';
 
     protected string $view = 'livewire-tables::components.tools.filters.text-field';
 
@@ -26,14 +26,16 @@ class TextFilter extends Filter
 
     protected function getCoreInputAttributes(): array
     {
-        $attributes = array_merge(parent::getCoreInputAttributes(),
+        $attributes = array_merge(
+            parent::getCoreInputAttributes(),
             [
                 'type' => 'text',
                 'placeholder' => $this->hasConfig('placeholder') ? $this->getConfig('placeholder') : null,
                 'maxlength' => $this->hasConfig('maxlength') ? $this->getConfig('maxlength') : null,
                 'wire:key' => $this->generateWireKey($this->getGenericDisplayData()['tableName'], 'text'),
 
-            ]);
+            ]
+        );
         ksort($attributes);
 
         return $attributes;
